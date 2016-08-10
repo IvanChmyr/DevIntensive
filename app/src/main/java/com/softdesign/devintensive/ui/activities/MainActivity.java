@@ -1,21 +1,21 @@
 package com.softdesign.devintensive.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.utils.ConstantManager;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
+    private ImageView mCalling;
+    private CoordinatorLayout mCoordinatorLayout;
 
-   /* //для сохранения цвета при переворачивании экрана
-    protected EditText mEditText;
-    protected Button mRedButton, mGreenButon;
-    protected int mColorMode;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,27 +23,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate");
 
-       /* //для сохранения цвета при переворачивании экрана
-        mRedButton = (Button) findViewById(R.id.red_btn);
-        mGreenButon = (Button) findViewById(R.id.green_btn);
-        mEditText = (EditText) findViewById(R.id.textView);
-
-        mRedButton.setOnClickListener(this);
-        mGreenButon.setOnClickListener(this);*/
-
+        mCalling = (ImageView)findViewById(R.id.call_img);
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_container);
+        mCalling.setOnClickListener(this);
 
         if (savedInstanceState == null) {
             //активити запускаеться впервые
+
         } else {
             //активити уже создавалось
-            /*//для сохранения цвета при переворачивании экрана
-           mColorMode = savedInstanceState.getInt(ConstantManager.COLOR_MOD_KEY);
 
-            if (mColorMode == Color.RED) {
-                mEditText.setBackgroundColor(Color.RED);
-            } else if (mColorMode == Color.GREEN) {
-                mEditText.setBackgroundColor(Color.GREEN);
-            }*/
         }
     }
 
@@ -86,15 +75,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            /* //для сохранения цвета при переворачивании экрана
-            case R.id.green_btn:
-                mEditText.setBackgroundColor(Color.GREEN);
-                mColorMode = Color.GREEN;
+            case R.id.call_img:
+                /*showProgress();
+                runWithDelay();*/
+
                 break;
-            case R.id.red_btn:
-                mEditText.setBackgroundColor(Color.RED);
-                mColorMode = Color.RED;
-                break;*/
+
         }
     }
 
@@ -102,8 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-       /* //для сохранения цвета при переворачивании экрана
-        Log.d(TAG,"onSaveInstanceState");
-        outState.putInt(ConstantManager.COLOR_MOD_KEY, mColorMode);*/
+    }
+
+
+    private void showSnackbar(String message){
+        Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
 }
